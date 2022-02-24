@@ -151,19 +151,96 @@ import UIKit
 //
 //let newNumbers = numbers.map { $0 > 5 }
 
-class Shape {
-    var numberOfSides = 0
-    let constantProperty = 5
-    
-    
-    
+//class Shape {
+//    var numberOfSides = 0
+//    let constantProperty = 5
+//
+//
+//
+//    func simpleDescription() -> String {
+//        return "A shape with \(numberOfSides) sides"
+//    }
+//
+//    func methodReceiveArg(arg: Int) -> Void {
+//        print(arg)
+//    }
+//}
+
+//enum Rank: Int {
+//    case ace = 1
+//    case two, three, four, five, six, seven, eight, nine, ten
+//    case jack, queen, king
+//    func simpleDescription() -> String {
+//        switch self {
+//        case .ace:
+//            return "ace"
+//        case .jack:
+//            return "jack"
+//        case .queen:
+//            return "queen"
+//        case .king:
+//            return "king"
+//        default:
+//            return String(self.rawValue)
+//        }
+//    }
+//
+//    func compareFunc(val0: Rank, val1: Rank) -> Bool {
+//        return val0.rawValue > val1.rawValue
+//    }
+//}
+//
+//let ace = Rank.ace
+//ace.simpleDescription()
+//let aceRawValue = ace.rawValue
+//let result = ace.compareFunc(val0: Rank.queen, val1: Rank.jack)
+
+enum Suit {
+    case spades, hearts, diamonds, clubs
     func simpleDescription() -> String {
-        return "A shape with \(numberOfSides) sides"
+        switch self {
+        case .spades:
+            return "spades"
+        case .hearts:
+            return "hearts"
+        case .diamonds:
+            return "diamonds"
+        case .clubs:
+            return "clubs"
+        }
     }
     
-    func methodReceiveArg(arg: Int) -> Void {
-        print(arg)
+    func color() -> String {
+        switch self {
+        case .spades:
+            return "black"
+        case .hearts:
+            return "red"
+        case .diamonds:
+            return "red"
+        case .clubs:
+            return "black"
+        }
     }
+}
+
+let hearts = Suit.hearts
+let heartsDescription = hearts.simpleDescription()
+hearts.color()
+
+enum ServerResponse {
+    case result(String, String)
+    case failure(String)
+}
+
+let success = ServerResponse.result("6:00 am", "8:09 pm")
+let failure = ServerResponse.failure("Out of cheese.")
+
+switch failure {
+case let .result(sunrise, sunset):
+    print("Sunrise is at \(sunrise) and sunset is at \(sunset)")
+case let .failure(message):
+    print("Failure...  \(message)")
 }
 
 
