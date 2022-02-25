@@ -195,52 +195,105 @@ import UIKit
 //let aceRawValue = ace.rawValue
 //let result = ace.compareFunc(val0: Rank.queen, val1: Rank.jack)
 
-enum Suit {
-    case spades, hearts, diamonds, clubs
-    func simpleDescription() -> String {
-        switch self {
-        case .spades:
-            return "spades"
-        case .hearts:
-            return "hearts"
-        case .diamonds:
-            return "diamonds"
-        case .clubs:
-            return "clubs"
-        }
-    }
-    
-    func color() -> String {
-        switch self {
-        case .spades:
-            return "black"
-        case .hearts:
-            return "red"
-        case .diamonds:
-            return "red"
-        case .clubs:
-            return "black"
-        }
-    }
-}
+//enum Suit {
+//    case spades, hearts, diamonds, clubs
+//    func simpleDescription() -> String {
+//        switch self {
+//        case .spades:
+//            return "spades"
+//        case .hearts:
+//            return "hearts"
+//        case .diamonds:
+//            return "diamonds"
+//        case .clubs:
+//            return "clubs"
+//        }
+//    }
+//
+//    func color() -> String {
+//        switch self {
+//        case .spades:
+//            return "black"
+//        case .hearts:
+//            return "red"
+//        case .diamonds:
+//            return "red"
+//        case .clubs:
+//            return "black"
+//        }
+//    }
+//}
+//
+//let hearts = Suit.hearts
+//let heartsDescription = hearts.simpleDescription()
+//hearts.color()
+//
+//enum ServerResponse {
+//    case result(String, String)
+//    case failure(String)
+//}
+//
+//let success = ServerResponse.result("6:00 am", "8:09 pm")
+//let failure = ServerResponse.failure("Out of cheese.")
+//
+//switch failure {
+//case let .result(sunrise, sunset):
+//    print("Sunrise is at \(sunrise) and sunset is at \(sunset)")
+//case let .failure(message):
+//    print("Failure...  \(message)")
+//}
 
-let hearts = Suit.hearts
-let heartsDescription = hearts.simpleDescription()
-hearts.color()
 
-enum ServerResponse {
-    case result(String, String)
-    case failure(String)
-}
-
-let success = ServerResponse.result("6:00 am", "8:09 pm")
-let failure = ServerResponse.failure("Out of cheese.")
-
-switch failure {
-case let .result(sunrise, sunset):
-    print("Sunrise is at \(sunrise) and sunset is at \(sunset)")
-case let .failure(message):
-    print("Failure...  \(message)")
-}
-
-
+//protocol ExampleProtocol {
+//    var simpleDescription: String { get }
+//    mutating func adjust()
+//    mutating func moreAdjust()
+//}
+//
+//
+//class SimpleClass: ExampleProtocol {
+//    func moreAdjust() {
+//        print(simpleDescription)
+//    }
+//    
+//    var simpleDescription: String = "A very simple class."
+//    var anotherProperty: Int = 69105
+//    func adjust() {
+//        simpleDescription += "  Now 100% adjusted."
+//    }
+//}
+//var a = SimpleClass()
+//a.adjust()
+//a.moreAdjust()
+//let aDescription = a.simpleDescription
+//
+//struct SimpleStructure: ExampleProtocol {
+//    func moreAdjust() {
+//        print(simpleDescription)
+//    }
+//    var simpleDescription: String = "A simple structure"
+//    mutating func adjust() {
+//        simpleDescription += " (adjusted)"
+//    }
+//}
+//var b = SimpleStructure()
+//b.adjust()
+//b.moreAdjust()
+//
+//let bDescription = b.simpleDescription
+//
+//extension Double: ExampleProtocol {
+//    var simpleDescription: String {
+//        return "The number \(self)"
+//    }
+//    
+//    mutating func adjust() {
+//        
+//    }
+//    
+//    mutating func moreAdjust() {
+//    }
+//}
+//
+//var dou = 2.5
+//dou.simpleDescription
