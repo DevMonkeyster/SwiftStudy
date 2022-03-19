@@ -255,7 +255,7 @@ import UIKit
 //    func moreAdjust() {
 //        print(simpleDescription)
 //    }
-//    
+//
 //    var simpleDescription: String = "A very simple class."
 //    var anotherProperty: Int = 69105
 //    func adjust() {
@@ -286,14 +286,95 @@ import UIKit
 //    var simpleDescription: String {
 //        return "The number \(self)"
 //    }
-//    
+//
 //    mutating func adjust() {
-//        
+//
 //    }
-//    
+//
 //    mutating func moreAdjust() {
 //    }
 //}
 //
 //var dou = 2.5
 //dou.simpleDescription
+
+
+//class Bank {
+//
+//    var account: [Int]
+//
+//    init(_ balance: [Int]) {
+//        self.account = balance
+//    }
+//
+//    func checkAccount(_ accountIndex: Int) -> Bool {
+//        return accountIndex >= 0 && accountIndex <= self.account.count - 1
+//    }
+//
+//    func transfer(_ account1: Int, _ account2: Int, _ money: Int) -> Bool {
+//        if checkAccount(account1-1) == false || checkAccount(account2-1) == false {
+//            return false
+//        }
+//        if self.account[account1-1] < money {
+//            return false
+//        }
+//        self.account[account1-1] -= money
+//        self.account[account2-1] += money
+//        return true
+//    }
+//
+//    func deposit(_ account: Int, _ money: Int) -> Bool {
+//        if checkAccount(account-1) == false{
+//            return false
+//        }
+//
+//        self.account[account-1] += money
+//        return true
+//    }
+//
+//    func withdraw(_ account: Int, _ money: Int) -> Bool {
+//        if checkAccount(account-1) == false{
+//            return false
+//        }
+//        if self.account[account-1] < money {
+//            return false
+//        }
+//        self.account[account-1] -= money
+//        return true
+//    }
+//}
+
+
+//public class TreeNode {
+//    public var val: Int
+//    public var left: TreeNode?
+//    public var right: TreeNode?
+//    public init() { self.val = 0; self.left = nil; self.right = nil; }
+//    public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
+//    public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
+//        self.val = val
+//        self.left = left
+//        self.right = right
+//    }
+//}
+//
+//class Solution {
+//    func tree2str(_ root: TreeNode?) -> String {
+//        if root!.left == nil && root!.right == nil { return "\(root!.val)" }
+//
+//        var left, right: String
+//  
+//        if root!.left == nil && root!.right != nil {
+//            right = "(\(tree2str(root!.right)))"
+//            left = "()"
+//        }else if root!.left != nil && root!.right == nil {
+//            left = "(\(tree2str(root!.left)))"
+//            right = "()"
+//        }else {
+//            left = "(\(tree2str(root!.left)))"
+//            right = "(\(tree2str(root!.right)))"
+//        }
+//        return "\(root!.val)\(left)\(right)"
+//    }
+//}
+ 
