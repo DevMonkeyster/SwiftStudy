@@ -363,7 +363,7 @@ import UIKit
 //        if root!.left == nil && root!.right == nil { return "\(root!.val)" }
 //
 //        var left, right: String
-//  
+//
 //        if root!.left == nil && root!.right != nil {
 //            right = "(\(tree2str(root!.right)))"
 //            left = "()"
@@ -375,6 +375,43 @@ import UIKit
 //            right = "(\(tree2str(root!.right)))"
 //        }
 //        return "\(root!.val)\(left)\(right)"
+//    }
+//}
+
+/**
+  Definition for a binary tree node.
+  */
+//public class TreeNode {
+//    public var val: Int
+//    public var left: TreeNode?
+//    public var right: TreeNode?
+//    public init() { self.val = 0; self.left = nil; self.right = nil; }
+//    public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
+//    public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
+//        self.val = val
+//        self.left = left
+//        self.right = right
+//    }
+//}
+// 
+//class Solution {
+//    var treeValue = Set<Int> ()
+//    var findTree = false
+//    func findTarget(_ root: TreeNode?, _ k: Int) -> Bool {
+//        func findTreeValue(_ tree: TreeNode?) -> Void {
+//            if tree == nil { return }
+//            treeValue.insert(tree!.val)
+//            
+//            if treeValue.contains(k - tree!.val) && (k - tree!.val != tree!.val) {
+//                findTree = true
+//            }
+//            
+//            findTreeValue(tree!.left)
+//            findTreeValue(tree!.right)
+//        }
+//        
+//        findTreeValue(root)
+//        return findTree
 //    }
 //}
  
