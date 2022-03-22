@@ -393,7 +393,7 @@ import UIKit
 //        self.right = right
 //    }
 //}
-// 
+//
 //class Solution {
 //    var treeValue = Set<Int> ()
 //    var findTree = false
@@ -401,17 +401,42 @@ import UIKit
 //        func findTreeValue(_ tree: TreeNode?) -> Void {
 //            if tree == nil { return }
 //            treeValue.insert(tree!.val)
-//            
+//
 //            if treeValue.contains(k - tree!.val) && (k - tree!.val != tree!.val) {
 //                findTree = true
 //            }
-//            
+//
 //            findTreeValue(tree!.left)
 //            findTreeValue(tree!.right)
 //        }
-//        
+//
 //        findTreeValue(root)
 //        return findTree
 //    }
 //}
+
+
+class Solution {
+    func winnerOfGame(_ colors: String) -> Bool {
+        if colors.count <= 2 { return false }
+        var countA = 0, countB = 0, contiA = 0, contiB = 0
+
+        for cha in  colors{
+            if cha == "A" {
+                contiA += 1
+                contiB = 0
+            } else {
+                contiA = 0
+                contiB += 1
+            }
+            
+            if contiA >= 3 {
+                countA += 1
+            }else if contiB >= 3 {
+                countB += 1
+            }
+        }
+        return countA > countB
+    }
+}
  
