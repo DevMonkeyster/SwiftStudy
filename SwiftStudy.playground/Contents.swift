@@ -416,27 +416,67 @@ import UIKit
 //}
 
 
-class Solution {
-    func winnerOfGame(_ colors: String) -> Bool {
-        if colors.count <= 2 { return false }
-        var countA = 0, countB = 0, contiA = 0, contiB = 0
+//class Solution {
+//    func winnerOfGame(_ colors: String) -> Bool {
+//        if colors.count <= 2 { return false }
+//        var countA = 0, countB = 0, contiA = 0, contiB = 0
+//
+//        for cha in  colors{
+//            if cha == "A" {
+//                contiA += 1
+//                contiB = 0
+//            } else {
+//                contiA = 0
+//                contiB += 1
+//            }
+//
+//            if contiA >= 3 {
+//                countA += 1
+//            }else if contiB >= 3 {
+//                countB += 1
+//            }
+//        }
+//        return countA > countB
+//    }
+//}
 
-        for cha in  colors{
-            if cha == "A" {
-                contiA += 1
-                contiB = 0
-            } else {
-                contiA = 0
-                contiB += 1
-            }
+
+class Solution {
+    func findKthNumber(_ n: Int, _ k: Int) -> Int {
+        
+        func findNodeCount(_ count: Int, _ node: Int) -> Int {
+            var curNode = node
+            var nextNode = node + 1
+            var sum = 0
             
-            if contiA >= 3 {
-                countA += 1
-            }else if contiB >= 3 {
-                countB += 1
+            while (curNode <= count) {
+                sum += min(count - curNode + 1, nextNode - curNode)
+                curNode *= 10
+                nextNode *= 10
+            }
+            print("count:\(count) node:\(node) sum:\(sum)")
+            return sum
+        }
+        
+        var curNode = 1
+        var nodeCount = k - 1
+        
+        while nodeCount > 0 {
+            let subNodeCount = findNodeCount(n, curNode)
+            if subNodeCount > nodeCount {
+                curNode *= 10
+                nodeCount -= 1
+            } else {
+                curNode += 1
+                nodeCount -= subNodeCount
             }
         }
-        return countA > countB
+        
+        return curNode
     }
+
 }
- 
+
+
+ var sol = Solution()
+sol.findKthNumber(265, 200)

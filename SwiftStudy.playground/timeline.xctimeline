@@ -3,7 +3,12 @@
    version = "3.0">
    <TimelineItems>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "file:///Users/hourui/Documents/Swift/SwiftStudy/SwiftStudy.playground#CharacterRangeLen=62&amp;CharacterRangeLoc=6834&amp;EndingColumnNumber=2&amp;EndingLineNumber=311&amp;StartingColumnNumber=17&amp;StartingLineNumber=310&amp;Timestamp=669616344.545125"
+         documentLocation = "file:///Users/hourui/Documents/Swift/SwiftStudy/SwiftStudy.playground#CharacterRangeLen=62&amp;CharacterRangeLoc=6834&amp;EndingColumnNumber=2&amp;EndingLineNumber=311&amp;StartingColumnNumber=17&amp;StartingLineNumber=310&amp;Timestamp=669720329.695469"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/hourui/Documents/Swift/SwiftStudy/SwiftStudy.playground#CharacterRangeLen=5&amp;CharacterRangeLoc=11557&amp;EndingColumnNumber=5&amp;EndingLineNumber=475&amp;StartingColumnNumber=0&amp;StartingLineNumber=475&amp;Timestamp=669720329.695634"
          selectedRepresentationIndex = "0"
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>
