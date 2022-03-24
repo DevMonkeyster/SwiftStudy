@@ -441,42 +441,77 @@ import UIKit
 //}
 
 
-class Solution {
-    func findKthNumber(_ n: Int, _ k: Int) -> Int {
-        
-        func findNodeCount(_ count: Int, _ node: Int) -> Int {
-            var curNode = node
-            var nextNode = node + 1
-            var sum = 0
-            
-            while (curNode <= count) {
-                sum += min(count - curNode + 1, nextNode - curNode)
-                curNode *= 10
-                nextNode *= 10
-            }
-            print("count:\(count) node:\(node) sum:\(sum)")
-            return sum
-        }
-        
-        var curNode = 1
-        var nodeCount = k - 1
-        
-        while nodeCount > 0 {
-            let subNodeCount = findNodeCount(n, curNode)
-            if subNodeCount > nodeCount {
-                curNode *= 10
-                nodeCount -= 1
-            } else {
-                curNode += 1
-                nodeCount -= subNodeCount
-            }
-        }
-        
-        return curNode
-    }
+//class Solution {
+//    func findKthNumber(_ n: Int, _ k: Int) -> Int {
+//
+//        func findNodeCount(_ count: Int, _ node: Int) -> Int {
+//            var curNode = node
+//            var nextNode = node + 1
+//            var sum = 0
+//
+//            while (curNode <= count) {
+//                sum += min(count - curNode + 1, nextNode - curNode)
+//                curNode *= 10
+//                nextNode *= 10
+//            }
+//            print("count:\(count) node:\(node) sum:\(sum)")
+//            return sum
+//        }
+//
+//        var curNode = 1
+//        var nodeCount = k - 1
+//
+//        while nodeCount > 0 {
+//            let subNodeCount = findNodeCount(n, curNode)
+//            if subNodeCount > nodeCount {
+//                curNode *= 10
+//                nodeCount -= 1
+//            } else {
+//                curNode += 1
+//                nodeCount -= subNodeCount
+//            }
+//        }
+//
+//        return curNode
+//    }
+//
+//}
+//
+//
+// var sol = Solution()
+//sol.findKthNumber(265, 200)
 
+
+// leetcode 661
+
+class Solution {
+    func imageSmoother(_ img: [[Int]]) -> [[Int]] {
+        
+        func averageImage(_ imgIndex:(Int, Int)) -> Int {
+            var count = 0
+            var sum = 0
+            for indexH in [imgIndex.0 - 1, imgIndex.0, imgIndex.0 + 1] {
+                for indexV in [imgIndex.1 - 1, imgIndex.1, imgIndex.1 + 1] {
+                    if indexH >= 0 && indexV >= 0 && indexH < img.count && indexV < img.first!.count {
+                        count += 1
+                        sum += img[indexH][indexV]
+                    }
+                }
+            }
+            return sum / count
+        }
+        
+        var resultImg : [[Int]] = img
+        for (indexH, imgH) in img.enumerated() {
+            for (indexV, _) in imgH.enumerated() {
+                resultImg[indexH][indexV] = averageImage((indexH, indexV))
+            }
+        }
+        
+        return resultImg
+    }
 }
 
 
- var sol = Solution()
-sol.findKthNumber(265, 200)
+var sol = Solution()
+sol.imageSmoother([[1,1,1],[1,0,1],[1,1,1]])
