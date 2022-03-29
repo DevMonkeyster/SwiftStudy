@@ -1,4 +1,5 @@
 import UIKit
+import AVKit
 
 //var greeting = "Hello, playground"
 //print(greeting)
@@ -454,21 +455,20 @@ import UIKit
 //                curNode *= 10
 //                nextNode *= 10
 //            }
-//            print("count:\(count) node:\(node) sum:\(sum)")
 //            return sum
 //        }
 //
 //        var curNode = 1
-//        var nodeCount = k - 1
+//        var remainCount = k - 1
 //
-//        while nodeCount > 0 {
+//        while remainCount > 0 {
 //            let subNodeCount = findNodeCount(n, curNode)
-//            if subNodeCount > nodeCount {
+//            if subNodeCount > remainCount {
 //                curNode *= 10
-//                nodeCount -= 1
+//                remainCount -= 1
 //            } else {
 //                curNode += 1
-//                nodeCount -= subNodeCount
+//                remainCount -= subNodeCount
 //            }
 //        }
 //
@@ -484,34 +484,86 @@ import UIKit
 
 // leetcode 661
 
+//class Solution {
+//    func imageSmoother(_ img: [[Int]]) -> [[Int]] {
+//
+//        func averageImage(_ imgIndex:(Int, Int)) -> Int {
+//            var count = 0
+//            var sum = 0
+//            for indexH in [imgIndex.0 - 1, imgIndex.0, imgIndex.0 + 1] {
+//                for indexV in [imgIndex.1 - 1, imgIndex.1, imgIndex.1 + 1] {
+//                    if indexH >= 0 && indexV >= 0 && indexH < img.count && indexV < img.first!.count {
+//                        count += 1
+//                        sum += img[indexH][indexV]
+//                    }
+//                }
+//            }
+//            return sum / count
+//        }
+//
+//        var resultImg : [[Int]] = img
+//        for (indexH, imgH) in img.enumerated() {
+//            for (indexV, _) in imgH.enumerated() {
+//                resultImg[indexH][indexV] = averageImage((indexH, indexV))
+//            }
+//        }
+//
+//        return resultImg
+//    }
+//}
+//
+//
+//var sol = Solution()
+//sol.imageSmoother([[1,1,1],[1,0,1],[1,1,1]])
+
+
+// 172. Factorial Trailing Zeroes
 class Solution {
-    func imageSmoother(_ img: [[Int]]) -> [[Int]] {
-        
-        func averageImage(_ imgIndex:(Int, Int)) -> Int {
-            var count = 0
-            var sum = 0
-            for indexH in [imgIndex.0 - 1, imgIndex.0, imgIndex.0 + 1] {
-                for indexV in [imgIndex.1 - 1, imgIndex.1, imgIndex.1 + 1] {
-                    if indexH >= 0 && indexV >= 0 && indexH < img.count && indexV < img.first!.count {
-                        count += 1
-                        sum += img[indexH][indexV]
-                    }
+    func trailingZeroes(_ n: Int) -> Int {
+        var result = 0
+        var num = n
+        while num >= 5 {
+            num /= 5
+            result += num
+        }
+        return result
+    }
+    
+    ///2024. 考试的最大困扰度
+    func maxConsecutiveAnswers(_ answerKey: String, _ k: Int) -> Int {
+        print(answerKey.count);
+        var leftT = 0, leftF = 0, right = 0, remainT = k, remainF = k
+        var resultT = 0, resultF = 0
+        let str = Array(answerKey)
+        for s in str {
+            if s != "T" {
+                remainT -= 1
+            } else {
+                remainF -= 1
+            }
+            
+            while remainT < 0 {
+                if str[leftT] != "T" {
+                    remainT += 1
                 }
+                leftT += 1
             }
-            return sum / count
-        }
-        
-        var resultImg : [[Int]] = img
-        for (indexH, imgH) in img.enumerated() {
-            for (indexV, _) in imgH.enumerated() {
-                resultImg[indexH][indexV] = averageImage((indexH, indexV))
+            
+            while remainF < 0 {
+                if str[leftF] == "T" {
+                    remainF += 1
+                }
+                leftF += 1
             }
+            resultT = max(right - leftT + 1, resultT)
+            resultF = max(right - leftF + 1, resultF)
+            right += 1
         }
-        
-        return resultImg
+        return max(resultF, resultT)
     }
 }
 
 
 var sol = Solution()
-sol.imageSmoother([[1,1,1],[1,0,1],[1,1,1]])
+//sol.maxConsecutiveAnswers("TTFFTT", 2)
+//sol.maxConsecutiveAnswers("TTT", 1675)
