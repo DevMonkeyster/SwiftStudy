@@ -519,51 +519,86 @@ import AVKit
 
 // 172. Factorial Trailing Zeroes
 class Solution {
-    func trailingZeroes(_ n: Int) -> Int {
-        var result = 0
-        var num = n
-        while num >= 5 {
-            num /= 5
-            result += num
+    //    func trailingZeroes(_ n: Int) -> Int {
+    //        var result = 0
+    //        var num = n
+    //        while num >= 5 {
+    //            num /= 5
+    //            result += num
+    //        }
+    //        return result
+    //    }
+    //
+    //    ///2024. 考试的最大困扰度
+    //    func maxConsecutiveAnswers(_ answerKey: String, _ k: Int) -> Int {
+    //        print(answerKey.count);
+    //        var leftT = 0, leftF = 0, right = 0, remainT = k, remainF = k
+    //        var resultT = 0, resultF = 0
+    //        let str = Array(answerKey)
+    //        for s in str {
+    //            if s != "T" {
+    //                remainT -= 1
+    //            } else {
+    //                remainF -= 1
+    //            }
+    //
+    //            while remainT < 0 {
+    //                if str[leftT] != "T" {
+    //                    remainT += 1
+    //                }
+    //                leftT += 1
+    //            }
+    //
+    //            while remainF < 0 {
+    //                if str[leftF] == "T" {
+    //                    remainF += 1
+    //                }
+    //                leftF += 1
+    //            }
+    //            resultT = max(right - leftT + 1, resultT)
+    //            resultF = max(right - leftF + 1, resultF)
+    //            right += 1
+    //        }
+    //        return max(resultF, resultT)
+    //    }
+    
+    func busiestServers(_ k: Int, _ arrival: [Int], _ load: [Int]) -> [Int] {
+        var emptyServer = Array(repeating: 0, count: k)
+        var serverBussiness = Array(repeating: 0, count: k)
+        for (idx, arl) in arrival.enumerated() {
+            var serverIdx = idx % k
+            for _ in 0 ..< k {
+                if emptyServer[serverIdx] <= arl {
+                    emptyServer[serverIdx] = arl + load[idx]
+                    serverBussiness[serverIdx] += 1
+                    print("\(serverBussiness) \(emptyServer)")
+                    break
+                }
+                serverIdx += 1
+                if serverIdx >= k {
+                    serverIdx = 0
+                }
+            }
+        }
+        
+        serverBussiness
+        
+        var maxCount = -1
+        var result = [0]
+        for (idx, busCount) in serverBussiness.enumerated() {
+            if maxCount < busCount {
+                result = [idx]
+            } else if maxCount == busCount {
+                result.append(idx)
+            }
+            maxCount = max(maxCount, busCount)
         }
         return result
-    }
-    
-    ///2024. 考试的最大困扰度
-    func maxConsecutiveAnswers(_ answerKey: String, _ k: Int) -> Int {
-        print(answerKey.count);
-        var leftT = 0, leftF = 0, right = 0, remainT = k, remainF = k
-        var resultT = 0, resultF = 0
-        let str = Array(answerKey)
-        for s in str {
-            if s != "T" {
-                remainT -= 1
-            } else {
-                remainF -= 1
-            }
-            
-            while remainT < 0 {
-                if str[leftT] != "T" {
-                    remainT += 1
-                }
-                leftT += 1
-            }
-            
-            while remainF < 0 {
-                if str[leftF] == "T" {
-                    remainF += 1
-                }
-                leftF += 1
-            }
-            resultT = max(right - leftT + 1, resultT)
-            resultF = max(right - leftF + 1, resultF)
-            right += 1
-        }
-        return max(resultF, resultT)
     }
 }
 
 
 var sol = Solution()
-//sol.maxConsecutiveAnswers("TTFFTT", 2)
-//sol.maxConsecutiveAnswers("TTT", 1675)
+sol.busiestServers(3,
+                   [1,2,3,4,8,9,10],
+                   [5,2,10,3,1,2,2])
