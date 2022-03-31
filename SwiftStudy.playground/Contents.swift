@@ -562,36 +562,58 @@ class Solution {
     //        return max(resultF, resultT)
     //    }
     
-    func busiestServers(_ k: Int, _ arrival: [Int], _ load: [Int]) -> [Int] {
-        var emptyServer = Array(repeating: 0, count: k)
-        var serverBussiness = Array(repeating: 0, count: k)
-        for (idx, arl) in arrival.enumerated() {
-            var serverIdx = idx % k
-            for _ in 0 ..< k {
-                if emptyServer[serverIdx] <= arl {
-                    emptyServer[serverIdx] = arl + load[idx]
-                    serverBussiness[serverIdx] += 1
-                    print("\(serverBussiness) \(emptyServer)")
-                    break
+//    func busiestServers(_ k: Int, _ arrival: [Int], _ load: [Int]) -> [Int] {
+//        var emptyServer = Array(repeating: 0, count: k)
+//        var serverBussiness = Array(repeating: 0, count: k)
+//        for (idx, arl) in arrival.enumerated() {
+//            var serverIdx = idx % k
+//            for _ in 0 ..< k {
+//                if emptyServer[serverIdx] <= arl {
+//                    emptyServer[serverIdx] = arl + load[idx]
+//                    serverBussiness[serverIdx] += 1
+//                    print("\(serverBussiness) \(emptyServer)")
+//                    break
+//                }
+//                serverIdx += 1
+//                if serverIdx >= k {
+//                    serverIdx = 0
+//                }
+//            }
+//        }
+//
+//        var maxCount = -1
+//        var result = [0]
+//        for (idx, busCount) in serverBussiness.enumerated() {
+//            if maxCount < busCount {
+//                result = [idx]
+//            } else if maxCount == busCount {
+//                result.append(idx)
+//            }
+//            maxCount = max(maxCount, busCount)
+//        }
+//        return result
+//    }
+    
+    func selfDividingNumbers(_ left: Int, _ right: Int) -> [Int] {
+        
+        func isDividingNumber(_ num: Int) -> Bool {
+            print(num)
+            if num % 10 == 0 { return false }
+            var mult = 1
+            while num / mult > 0 {
+                let divid = num / mult % 10
+                if divid == 0 || num % divid != 0 {
+                    return false
                 }
-                serverIdx += 1
-                if serverIdx >= k {
-                    serverIdx = 0
-                }
+                mult *= 10
             }
+            return true
         }
-        
-        serverBussiness
-        
-        var maxCount = -1
-        var result = [0]
-        for (idx, busCount) in serverBussiness.enumerated() {
-            if maxCount < busCount {
-                result = [idx]
-            } else if maxCount == busCount {
-                result.append(idx)
+        var result = Array<Int>()
+        for num in left...right {
+            if isDividingNumber(num) {
+                result.append(num)
             }
-            maxCount = max(maxCount, busCount)
         }
         return result
     }
@@ -599,6 +621,7 @@ class Solution {
 
 
 var sol = Solution()
-sol.busiestServers(3,
-                   [1,2,3,4,8,9,10],
-                   [5,2,10,3,1,2,2])
+sol.selfDividingNumbers(66, 708)
+
+var s  = 121 % 1000
+
