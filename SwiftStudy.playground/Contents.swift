@@ -1,5 +1,6 @@
 import UIKit
 import AVKit
+import Darwin
 
 //var greeting = "Hello, playground"
 //print(greeting)
@@ -518,7 +519,7 @@ import AVKit
 
 
 // 172. Factorial Trailing Zeroes
-class Solution {
+//class Solution {
     //    func trailingZeroes(_ n: Int) -> Int {
     //        var result = 0
     //        var num = n
@@ -594,34 +595,61 @@ class Solution {
 //        return result
 //    }
     
-    func selfDividingNumbers(_ left: Int, _ right: Int) -> [Int] {
+//    func selfDividingNumbers(_ left: Int, _ right: Int) -> [Int] {
+//
+//        func isDividingNumber(_ num: Int) -> Bool {
+//            print(num)
+//            if num % 10 == 0 { return false }
+//            var mult = 1
+//            while num / mult > 0 {
+//                let divid = num / mult % 10
+//                if divid == 0 || num % divid != 0 {
+//                    return false
+//                }
+//                mult *= 10
+//            }
+//            return true
+//        }
+//        var result = Array<Int>()
+//        for num in left...right {
+//            if isDividingNumber(num) {
+//                result.append(num)
+//            }
+//        }
+//        return result
+//    }
+//}
+
+
+
+class Solution {
+
+    struct SolElement: Hashable {
+        var idx: Int
+        var value: Int
         
-        func isDividingNumber(_ num: Int) -> Bool {
-            print(num)
-            if num % 10 == 0 { return false }
-            var mult = 1
-            while num / mult > 0 {
-                let divid = num / mult % 10
-                if divid == 0 || num % divid != 0 {
-                    return false
-                }
-                mult *= 10
-            }
-            return true
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(idx)
         }
-        var result = Array<Int>()
-        for num in left...right {
-            if isDividingNumber(num) {
-                result.append(num)
+    }
+    
+    func canReorderDoubled(_ arr: [Int]) -> Bool {
+        if arr.count % 2 != 0 {
+            return false
+        }
+        var arrV: [Double] = Array()
+        for arranged in arr.sorted(by: { x, y in
+            x < y
+        }) {
+            let calArranged = arranged > 0 ? Double(arranged) / 2 : Double(arranged) * 2
+            if arrV.contains(calArranged) {
+                let idx = arrV.firstIndex(of: calArranged)
+                arrV.remove(at: idx!)
+            } else {
+                arrV.append(Double(arranged))
             }
         }
-        return result
+        return arrV.isEmpty
     }
 }
-
-
-var sol = Solution()
-sol.selfDividingNumbers(66, 708)
-
-var s  = 121 % 1000
 
