@@ -622,17 +622,7 @@ import Darwin
 
 
 
-class Solution {
-
-    struct SolElement: Hashable {
-        var idx: Int
-        var value: Int
-        
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(idx)
-        }
-    }
-    
+class Solution {    
     func canReorderDoubled(_ arr: [Int]) -> Bool {
         if arr.count % 2 != 0 {
             return false
