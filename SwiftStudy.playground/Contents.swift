@@ -620,6 +620,11 @@ import Darwin
 //    }
 //}
 
+enum Planet: Int {
+    case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
+}
+
+
 
 
 class Solution {    
@@ -641,5 +646,113 @@ class Solution {
         }
         return arrV.isEmpty
     }
+    
+    /**
+     如果一个密码满足下述所有条件，则认为这个密码是强密码：
+         由至少 6 个，至多 20 个字符组成。
+         至少包含 一个小写 字母，一个大写 字母，和 一个数字 。
+         同一字符 不能 连续出现三次 (比如 "...aaa..." 是不允许的, 但是 "...aa...a..." 如果满足其他条件也可以算是强密码)。
+     给你一个字符串 password ，返回 将 password 修改到满足强密码条件需要的最少修改步数。如果 password 已经是强密码，则返回 0 。
+
+     在一步修改操作中，你可以：
+         插入一个字符到 password ，
+         从 password 中删除一个字符，或
+         用另一个字符来替换 password 中的某个字符。
+     */
+    
+    // 大写、小写、数字
+//    func strongPasswordChecker(_ password: String) -> Int {
+//        let pwdArr = Array(password)
+//        var lastChRecord = (Character(""), 0)
+//        var hasLowerCase = false
+//        var hasUpperCase = false
+//        var hasNumCase = false
+//        var needSetp = 0
+//        for ch in pwdArr {
+//            // 记录连续的
+//            if ch == lastChRecord.0 {
+//                lastChRecord.1 += 1
+//            } else {
+//                if lastChRecord.1 >= 3 {
+//                    needSetp += 1
+//                    needSetp += (lastChRecord.1 / 3)
+//                }
+//                lastChRecord.0 = ch
+//                lastChRecord.1 = 1
+//            }
+//            // 判断是否包含小写
+//            if hasLowerCase == false {
+//                if ch.isLowercase {
+//                    hasLowerCase = true
+//                }
+//            }
+//            // 判断是否包含大写
+//            if hasUpperCase == false {
+//                if ch.isUppercase {
+//                    hasUpperCase = true
+//                }
+//            }
+//            // 判断是否包含数字
+//            if hasNumCase == false {
+//                if ch.isNumber {
+//                    hasNumCase = true
+//                }
+//            }
+//        }
+//
+//        if hasNumCase == false {
+//            needSetp += 1
+//        }
+//
+//        if hasLowerCase == false {
+//            needSetp += 1
+//        }
+//
+//        if hasUpperCase == false {
+//            needSetp += 1
+//        }
+//
+//        // 大于20不做插入字符操作 删除操作可以顶替修改操作
+//        if password.count > 20 {
+//            needSetp += (20 - password.count)
+//        }
+//        // 小于6不做删除操作
+//        else if password.count < 6 {
+//
+//        }
+//        // 长度符合要求
+//        else {
+//
+//        }
+//
+//        if hasNumCase == false {
+//
+//        }
+//
+//
+//        return 0
+//    }
+    
+    func nextGreatestLetter(_ letters: [Character], _ target: Character) -> Character {
+        var minCha = letters.first
+        var result: Character?
+        for letter in letters {
+            minCha = min(letter, minCha!)
+            if (letter > target) {
+                result = letter
+                break;
+            }
+        }
+        
+        if result == nil {
+            return minCha!
+        }
+        return result!
+    }
 }
+
+var sol = Solution()
+//sol.nextGreatestLetter(["c","f","j"],"a")
+sol.nextGreatestLetter(["a","b"], "z")
+
 
