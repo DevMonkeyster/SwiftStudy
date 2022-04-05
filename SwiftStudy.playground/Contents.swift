@@ -733,26 +733,67 @@ class Solution {
 //        return 0
 //    }
     
-    func nextGreatestLetter(_ letters: [Character], _ target: Character) -> Character {
-        var minCha = letters.first
-        var result: Character?
-        for letter in letters {
-            minCha = min(letter, minCha!)
-            if (letter > target) {
-                result = letter
-                break;
+//    func nextGreatestLetter(_ letters: [Character], _ target: Character) -> Character {
+//        var minCha = letters.first
+//        var result: Character?
+//        for letter in letters {
+//            minCha = min(letter, minCha!)
+//            if (letter > target) {
+//                result = letter
+//                break;
+//            }
+//        }
+//
+//        if result == nil {
+//            return minCha!
+//        }
+//        return result!
+//    }
+    
+    func countPrimeSetBits(_ left: Int, _ right: Int) -> Int {
+        func isNumPrime(_ num: Int) -> Bool {
+            var oneCount = 1
+            var numV = num
+            while numV > 1 {
+                if numV % 2 == 1 {
+                    oneCount += 1
+                }
+                numV /= 2;
+            }
+            
+            
+            print(num,oneCount)
+            
+            if oneCount == 1 {return false}
+            
+            if [2,3,5,7].contains(oneCount) {
+                return true
+            }
+            
+            var isPrime = true
+            if oneCount % 2 == 0 || oneCount % 3 == 0 || oneCount % 5 == 0 || oneCount % 7 == 0 {
+                isPrime = false
+            }
+            return isPrime
+        }
+  
+        var count = 0
+        for i in left...right {
+            if isNumPrime(i) {
+                count += 1
             }
         }
-        
-        if result == nil {
-            return minCha!
-        }
-        return result!
+        return count
     }
 }
 
 var sol = Solution()
+sol.countPrimeSetBits(6, 10)
+
 //sol.nextGreatestLetter(["c","f","j"],"a")
-sol.nextGreatestLetter(["a","b"], "z")
+//sol.nextGreatestLetter(["a","b"], "z")
+
+
+
 
 
