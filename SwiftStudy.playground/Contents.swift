@@ -785,10 +785,72 @@ class Solution {
         }
         return count
     }
+    
+    func rotateString(_ s: String, _ goal: String) -> Bool {
+        if s.count != goal.count {return false}
+        var aArr = Array(s)
+        let bArr = Array(goal)
+        for cha in aArr {
+            aArr.insert(cha, at: aArr.endIndex)
+            aArr.remove(at: 0)
+            if aArr == bArr {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func reachingPoints(_ sx: Int, _ sy: Int, _ tx: Int, _ ty: Int) -> Bool {
+        if tx == sx && ty == sy {
+            return true
+        }
+    
+        if sx > tx || sy > ty {
+            return false
+        }
+        
+        if tx == sx {
+            if (ty - sy) % sx != 0{
+                return false
+            }
+            return true
+        }
+        
+        if ty == sy {
+            if (tx - sx) % sy != 0{
+                return false
+            }
+            return true
+        }
+        
+        if tx == ty {
+            return false
+        }
+        
+        var tempX = tx, tempY = ty
+        while (tempX >= sx && tempY >= sy) {
+            if tempX > tempY { // x+y, y
+                tempX -= tempY
+            } else if tempX < tempY { // x, x+y
+                tempY -= tempX
+            } else {
+                if tempX == sx && tempY == sy {
+                    return true
+                } else {
+                    return false
+                }
+            }
+            if tempX == sx && tempY == sy {
+                return true
+            }
+        }
+        return false;
+    }
 }
 
 var sol = Solution()
-sol.countPrimeSetBits(6, 10)
+sol.reachingPoints(9, 10, 9, 19)
+//sol.reachingPoints(9, 5, 12, 8)
 
 //sol.nextGreatestLetter(["c","f","j"],"a")
 //sol.nextGreatestLetter(["a","b"], "z")
