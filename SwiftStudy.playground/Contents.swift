@@ -750,106 +750,139 @@ class Solution {
 //        return result!
 //    }
     
-    func countPrimeSetBits(_ left: Int, _ right: Int) -> Int {
-        func isNumPrime(_ num: Int) -> Bool {
-            var oneCount = 1
-            var numV = num
-            while numV > 1 {
-                if numV % 2 == 1 {
-                    oneCount += 1
-                }
-                numV /= 2;
-            }
-            
-            
-            print(num,oneCount)
-            
-            if oneCount == 1 {return false}
-            
-            if [2,3,5,7].contains(oneCount) {
-                return true
-            }
-            
-            var isPrime = true
-            if oneCount % 2 == 0 || oneCount % 3 == 0 || oneCount % 5 == 0 || oneCount % 7 == 0 {
-                isPrime = false
-            }
-            return isPrime
+//    func countPrimeSetBits(_ left: Int, _ right: Int) -> Int {
+//        func isNumPrime(_ num: Int) -> Bool {
+//            var oneCount = 1
+//            var numV = num
+//            while numV > 1 {
+//                if numV % 2 == 1 {
+//                    oneCount += 1
+//                }
+//                numV /= 2;
+//            }
+//
+//
+//            print(num,oneCount)
+//
+//            if oneCount == 1 {return false}
+//
+//            if [2,3,5,7].contains(oneCount) {
+//                return true
+//            }
+//
+//            var isPrime = true
+//            if oneCount % 2 == 0 || oneCount % 3 == 0 || oneCount % 5 == 0 || oneCount % 7 == 0 {
+//                isPrime = false
+//            }
+//            return isPrime
+//        }
+//
+//        var count = 0
+//        for i in left...right {
+//            if isNumPrime(i) {
+//                count += 1
+//            }
+//        }
+//        return count
+//    }
+//
+//    func rotateString(_ s: String, _ goal: String) -> Bool {
+//        if s.count != goal.count {return false}
+//        var aArr = Array(s)
+//        let bArr = Array(goal)
+//        for cha in aArr {
+//            aArr.insert(cha, at: aArr.endIndex)
+//            aArr.remove(at: 0)
+//            if aArr == bArr {
+//                return true
+//            }
+//        }
+//        return false
+//    }
+//
+//    func reachingPoints(_ sx: Int, _ sy: Int, _ tx: Int, _ ty: Int) -> Bool {
+//        if tx == sx && ty == sy {
+//            return true
+//        }
+//
+//        if sx > tx || sy > ty {
+//            return false
+//        }
+//
+//        if tx == sx {
+//            if (ty - sy) % sx != 0{
+//                return false
+//            }
+//            return true
+//        }
+//
+//        if ty == sy {
+//            if (tx - sx) % sy != 0{
+//                return false
+//            }
+//            return true
+//        }
+//
+//        if tx == ty {
+//            return false
+//        }
+//
+//        var tempX = tx, tempY = ty
+//        while (tempX >= sx && tempY >= sy) {
+//            if tempX > tempY { // x+y, y
+//                tempX -= tempY
+//            } else if tempX < tempY { // x, x+y
+//                tempY -= tempX
+//            } else {
+//                if tempX == sx && tempY == sy {
+//                    return true
+//                } else {
+//                    return false
+//                }
+//            }
+//            if tempX == sx && tempY == sy {
+//                return true
+//            }
+//        }
+//        return false;
+//    }
+
+    func countNumbersWithUniqueDigits(_ n: Int) -> Int {
+        if n == 0 { return 1 }
+        var ans = 10, cnt = 9
+        for i in 0 ..< n - 1 {
+            print(i)
+            cnt *= 9 - i
+            ans += cnt
+            print(ans)
         }
-  
-        var count = 0
-        for i in left...right {
-            if isNumPrime(i) {
-                count += 1
-            }
-        }
-        return count
+        return ans
     }
     
-    func rotateString(_ s: String, _ goal: String) -> Bool {
-        if s.count != goal.count {return false}
-        var aArr = Array(s)
-        let bArr = Array(goal)
-        for cha in aArr {
-            aArr.insert(cha, at: aArr.endIndex)
-            aArr.remove(at: 0)
-            if aArr == bArr {
-                return true
-            }
-        }
-        return false
-    }
-    
-    func reachingPoints(_ sx: Int, _ sy: Int, _ tx: Int, _ ty: Int) -> Bool {
-        if tx == sx && ty == sy {
-            return true
-        }
-    
-        if sx > tx || sy > ty {
-            return false
-        }
-        
-        if tx == sx {
-            if (ty - sy) % sx != 0{
-                return false
-            }
-            return true
-        }
-        
-        if ty == sy {
-            if (tx - sx) % sy != 0{
-                return false
-            }
-            return true
-        }
-        
-        if tx == ty {
-            return false
-        }
-        
-        var tempX = tx, tempY = ty
-        while (tempX >= sx && tempY >= sy) {
-            if tempX > tempY { // x+y, y
-                tempX -= tempY
-            } else if tempX < tempY { // x, x+y
-                tempY -= tempX
+    func numberOfLines(_ widths: [Int], _ s: String) -> [Int] {
+        var line = 0
+        var lineCount = 1
+        for ch in s {
+            let num = widths[Int(ch.asciiValue! - Character("a").asciiValue!)]
+            if num + line > 100 {
+                lineCount += 1
+                line = num
             } else {
-                if tempX == sx && tempY == sy {
-                    return true
-                } else {
-                    return false
-                }
-            }
-            if tempX == sx && tempY == sy {
-                return true
+                line += num
             }
         }
-        return false;
+        
+        return [lineCount, line]
     }
+    
 }
 
 var sol = Solution()
-sol.reachingPoints(9, 10, 9, 19)
+sol.countNumbersWithUniqueDigits(5)
+
+sol.numberOfLines([10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
+                  "abcdefghijklmnopqrstuvwxyz")
+//sol.reachingPoints(9, 10, 9, 19)
 //sol.reachingPoints(9, 5, 12, 8)
 
 //sol.nextGreatestLetter(["c","f","j"],"a")
