@@ -848,78 +848,105 @@ class Solution {
 //        return false;
 //    }
 
-    func countNumbersWithUniqueDigits(_ n: Int) -> Int {
-        if n == 0 { return 1 }
-        var ans = 10, cnt = 9
-        for i in 0 ..< n - 1 {
-            print(i)
-            cnt *= 9 - i
-            ans += cnt
-            print(ans)
-        }
-        return ans
-    }
-    
-    func numberOfLines(_ widths: [Int], _ s: String) -> [Int] {
-        var line = 0
-        var lineCount = 1
-        for ch in s {
-            let num = widths[Int(ch.asciiValue! - Character("a").asciiValue!)]
-            if num + line > 100 {
-                lineCount += 1
-                line = num
-            } else {
-                line += num
-            }
-        }
-        
-        return [lineCount, line]
-    }
+//    func countNumbersWithUniqueDigits(_ n: Int) -> Int {
+//        if n == 0 { return 1 }
+//        var ans = 10, cnt = 9
+//        for i in 0 ..< n - 1 {
+//            print(i)
+//            cnt *= 9 - i
+//            ans += cnt
+//            print(ans)
+//        }
+//        return ans
+//    }
+//
+//    func numberOfLines(_ widths: [Int], _ s: String) -> [Int] {
+//        var line = 0
+//        var lineCount = 1
+//        for ch in s {
+//            let num = widths[Int(ch.asciiValue! - Character("a").asciiValue!)]
+//            if num + line > 100 {
+//                lineCount += 1
+//                line = num
+//            } else {
+//                line += num
+//            }
+//        }
+//
+//        return [lineCount, line]
+//    }
     
 }
 
-var sol = Solution()
-sol.countNumbersWithUniqueDigits(5)
-
-sol.numberOfLines([10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
-                  "abcdefghijklmnopqrstuvwxyz")
+//var sol = Solution()
+//sol.countNumbersWithUniqueDigits(5)
+//
+//sol.numberOfLines([10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10],
+//                  "abcdefghijklmnopqrstuvwxyz")
 //sol.reachingPoints(9, 10, 9, 19)
 //sol.reachingPoints(9, 5, 12, 8)
 
 //sol.nextGreatestLetter(["c","f","j"],"a")
 //sol.nextGreatestLetter(["a","b"], "z")
 
-class RandomizedSet {
+//class RandomizedSet {
+//
+//    var length: Int
+//    var vals: Set<Int>
+//    init() {
+//        length = 0
+//        vals = Set<Int>()
+//    }
+//
+//    func insert(_ val: Int) -> Bool {
+//        if vals.contains(val) { false }
+//        vals.insert(val)
+//        length += 1
+//        return true
+//    }
+//
+//    func remove(_ val: Int) -> Bool {
+//        if !vals.contains(val) { false }
+//        vals.remove(val)
+//        length -= 1
+//        return true
+//    }
+//
+//    func getRandom() -> Int {
+//        let rand = Int.random(in: 0..<length)
+//         for (idx,val) in vals.enumerated() {
+//             if idx == rand { return val }
+//         }
+//         return -1
+//    }
+//}
+
+
+
+class AClass {
+    func test() {
+        
+    }
     
-    var length: Int
-    var vals: Set<Int>
     init() {
-        length = 0
-        vals = Set<Int>()
-    }
-    
-    func insert(_ val: Int) -> Bool {
-        if vals.contains(val) { false }
-        vals.insert(val)
-        length += 1
-        return true
-    }
-    
-    func remove(_ val: Int) -> Bool {
-        if !vals.contains(val) { false }
-        vals.remove(val)
-        length -= 1
-        return true
-    }
-    
-    func getRandom() -> Int {
-        let rand = Int.random(in: 0..<length)
-         for (idx,val) in vals.enumerated() {
-             if idx == rand { return val }
-         }
-         return -1
+        test()
     }
 }
+
+class BClass: AClass {
+    var t: Int
+    override func test() {
+        print(t)
+    }
+    
+    override init() {
+        t = 4
+        super.init()
+    }
+}
+
+var bIns = BClass()
+bIns.test()
 
 
 
