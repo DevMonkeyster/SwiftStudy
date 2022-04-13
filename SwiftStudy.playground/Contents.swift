@@ -1,6 +1,7 @@
 import UIKit
 import AVKit
 import Darwin
+import Foundation
 
 //var greeting = "Hello, playground"
 //print(greeting)
@@ -887,6 +888,38 @@ sol.numberOfLines([10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,1
 
 //sol.nextGreatestLetter(["c","f","j"],"a")
 //sol.nextGreatestLetter(["a","b"], "z")
+
+class RandomizedSet {
+    
+    var length: Int
+    var vals: Set<Int>
+    init() {
+        length = 0
+        vals = Set<Int>()
+    }
+    
+    func insert(_ val: Int) -> Bool {
+        if vals.contains(val) { false }
+        vals.insert(val)
+        length += 1
+        return true
+    }
+    
+    func remove(_ val: Int) -> Bool {
+        if !vals.contains(val) { false }
+        vals.remove(val)
+        length -= 1
+        return true
+    }
+    
+    func getRandom() -> Int {
+        let rand = Int.random(in: 0..<length)
+         for (idx,val) in vals.enumerated() {
+             if idx == rand { return val }
+         }
+         return -1
+    }
+}
 
 
 
