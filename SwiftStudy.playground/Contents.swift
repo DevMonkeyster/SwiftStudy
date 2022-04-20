@@ -444,43 +444,185 @@ import Foundation
 //}
 
 
-//class Solution {
-//    func findKthNumber(_ n: Int, _ k: Int) -> Int {
+class Solution {
+    
+    
+    func findKthNumber(_ n: Int, _ k: Int) -> Int {
+        
+
+
+        func findNodeCount(_ count: Int, _ node: Int) -> Int {
+            var curNode = node
+            var nextNode = node + 1
+            var sum = 0
+
+            while (curNode <= count) {
+                sum += min(count - curNode + 1, nextNode - curNode)
+                curNode *= 10
+                nextNode *= 10
+            }
+            return sum
+        }
+
+        var curNode = 1
+        var remainCount = k - 1
+
+        while remainCount > 0 {
+            let subNodeCount = findNodeCount(n, curNode)
+            if subNodeCount > remainCount {
+                curNode *= 10
+                remainCount -= 1
+            } else {
+                curNode += 1
+                remainCount -= subNodeCount
+            }
+        }
+
+        return curNode
+    }
+    
+    func lexicalOrder(_ n: Int) -> [Int] {
+        var result = [Int]()
+        
+        // 1 10 100 101 102 11 12 13 14 15 16
+        // v = base * mult + remain
+        // <= n -> mult *= 10
+        // > n -> mult /= 10 remain += 1
+        
+        // <= n -> remain += 1
+        // > n -> remain = 1 mult /= 10
+        
+        // <= n -> remain += 1
+        // > n -> remain = 1 mult /= 10
+        
+        // mult = 1 -> base += 1 remain = 0
+        
+        var s = ""
+        s.enumerated()
+        
+        var num = 1
+        for _ in 1...n {
+            result.append(num)
+            if num * 10 <= n {
+                num *= 10
+            } else {
+                while (num % 10 == 9 || num + 1 > n) {
+                    num /= 10
+                }
+                num += 1
+            }
+        }
+        
+        return result
+    }
+    
+    func shortestToChar(_ s: String, _ c: Character) -> [Int] {
+        var result = [Int]()
+        var cIdxs = [Int]()
+        for (idx,ch) in s.enumerated() {
+            if ch == c {
+                cIdxs.append(idx)
+            }
+        }
+        
+        print(cIdxs)
+        
+        var left = 0, right = 1
+        for (idx,_) in s.enumerated() {
+            print(cIdxs[left],right, idx)
+            if idx <= cIdxs.first! {
+                result.append(abs(cIdxs.first! - idx))
+            }else if idx >= cIdxs.last! {
+                result.append(abs(cIdxs.last! - idx))
+            } else {
+                result.append(min(abs(cIdxs[left] - idx), abs(cIdxs[right] - idx)) )
+                if idx >= cIdxs[right] && right + 1 < cIdxs.count{
+                    left += 1
+                    right += 1
+                }
+            }
+            
+        }
+        
+        return result
+
+        }
+  
+    func lengthLongestPath(_ input: String) -> Int {
+        var result = [String]()
+        var temp = String()
+        var subLevel = 0, maxLength = 0, currentLevel = 0
+        var isFile = false
+        for ch in input {
+            switch ch {
+            case "\n":
+                if subLevel > 0 {
+                    temp = "/" + temp
+                }
+                while currentLevel >= subLevel {
+                    result.popLast()
+                    currentLevel -= 1
+                }
+                result.append(temp);
+                currentLevel = subLevel
+                subLevel = 0
+                temp = String()
+                if isFile == true {
+                    var length = 0
+                    for res in result {
+                        length += res.count
+                    }
+                    maxLength = max(maxLength, length)
+                    isFile = false
+                }
+            case "\t":
+                subLevel += 1
+            case ".":
+                temp += "."
+                isFile = true
+            default:
+                temp += String(ch)
+            }
+        }
+        
+        if temp.contains(".") && temp.count > 0 {
+            while currentLevel >= subLevel {
+                result.popLast()
+                currentLevel -= 1
+            }
+            if subLevel > 0 {
+                temp = "/" + temp;
+            }
+            
+            result.append(temp)
+            var length = 0
+            for res in result {
+                length += res.count
+            }
+            maxLength = max(maxLength, length)
+        }
+        
+        
+        return maxLength
+    }
+}
+
 //
-//        func findNodeCount(_ count: Int, _ node: Int) -> Int {
-//            var curNode = node
-//            var nextNode = node + 1
-//            var sum = 0
-//
-//            while (curNode <= count) {
-//                sum += min(count - curNode + 1, nextNode - curNode)
-//                curNode *= 10
-//                nextNode *= 10
-//            }
-//            return sum
-//        }
-//
-//        var curNode = 1
-//        var remainCount = k - 1
-//
-//        while remainCount > 0 {
-//            let subNodeCount = findNodeCount(n, curNode)
-//            if subNodeCount > remainCount {
-//                curNode *= 10
-//                remainCount -= 1
-//            } else {
-//                curNode += 1
-//                remainCount -= subNodeCount
-//            }
-//        }
-//
-//        return curNode
-//    }
-//
-//}
-//
-//
-// var sol = Solution()
+ var sol = Solution()
+//sol.lengthLongestPath("dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext")
+//sol.lengthLongestPath("file1.txt\nfile2.txt\nlongfile.txt")
+sol.lengthLongestPath("dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext")
+sol.lengthLongestPath("a")
+sol.lengthLongestPath("dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext")
+sol.lengthLongestPath("file1.txt\nfile2.txt\nlongfile.txt")
+sol.lengthLongestPath("a\n\tb\n\t\tc")
+sol.lengthLongestPath("dir\n\t        file.txt\n\tfile2.txt")
+//sol.shortestToChar("loveleetcode",
+//                   "e")
+//sol.shortestToChar("cizokxcijwbyspcfcqws",
+//                   "c")
+//sol.shortestToChar("aaba",
+//                   "b")
 //sol.findKthNumber(265, 200)
 
 
@@ -621,32 +763,32 @@ import Foundation
 //    }
 //}
 
-enum Planet: Int {
-    case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
-}
+//enum Planet: Int {
+//    case mercury = 1, venus, earth, mars, jupiter, saturn, uranus, neptune
+//}
 
 
 
 
-class Solution {    
-    func canReorderDoubled(_ arr: [Int]) -> Bool {
-        if arr.count % 2 != 0 {
-            return false
-        }
-        var arrV: [Double] = Array()
-        for arranged in arr.sorted(by: { x, y in
-            x < y
-        }) {
-            let calArranged = arranged > 0 ? Double(arranged) / 2 : Double(arranged) * 2
-            if arrV.contains(calArranged) {
-                let idx = arrV.firstIndex(of: calArranged)
-                arrV.remove(at: idx!)
-            } else {
-                arrV.append(Double(arranged))
-            }
-        }
-        return arrV.isEmpty
-    }
+//class Solution {
+//    func canReorderDoubled(_ arr: [Int]) -> Bool {
+//        if arr.count % 2 != 0 {
+//            return false
+//        }
+//        var arrV: [Double] = Array()
+//        for arranged in arr.sorted(by: { x, y in
+//            x < y
+//        }) {
+//            let calArranged = arranged > 0 ? Double(arranged) / 2 : Double(arranged) * 2
+//            if arrV.contains(calArranged) {
+//                let idx = arrV.firstIndex(of: calArranged)
+//                arrV.remove(at: idx!)
+//            } else {
+//                arrV.append(Double(arranged))
+//            }
+//        }
+//        return arrV.isEmpty
+//    }
     
     /**
      如果一个密码满足下述所有条件，则认为这个密码是强密码：
@@ -876,7 +1018,7 @@ class Solution {
 //        return [lineCount, line]
 //    }
     
-}
+//}
 
 //var sol = Solution()
 //sol.countNumbersWithUniqueDigits(5)
@@ -923,30 +1065,8 @@ class Solution {
 
 
 
-class AClass {
-    func test() {
-        
-    }
-    
-    init() {
-        test()
-    }
-}
 
-class BClass: AClass {
-    var t: Int
-    override func test() {
-        print(t)
-    }
-    
-    override init() {
-        t = 4
-        super.init()
-    }
-}
 
-var bIns = BClass()
-bIns.test()
 
 
 
